@@ -20,6 +20,9 @@ if sys.platform == "win32":
 elif sys.platform == "linux":
     print("Running on Linux")
 elif sys.platform == "darwin":
+    path = os.path.normpath(os.path.abspath(os.path.join(os.path.dirname(deposit_gui.dgui.__file__), "graphviz")))
+    print(path)
+    os.environ["DYLD_LIBRARY_PATH"] = f"{path}:{os.environ.get('DYLD_LIBRARY_PATH', '')}"
     print("Running on macOS.")
 else:
     print("Running on other OS.")

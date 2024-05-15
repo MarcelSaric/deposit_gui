@@ -1332,6 +1332,7 @@ class AGraph:
 
     def _get_prog(self, prog):
         # private: get path of graphviz program
+        print("prog")
         progs = {
             "neato",
             "dot",
@@ -1361,10 +1362,7 @@ class AGraph:
         elif sys.platform == "linux":
             print("Running on Linux.")
         elif sys.platform == "darwin":
-            try:  # user must pick one of the graphviz programs...
-                path = self._which(prog)
-            except:
-                raise ValueError(f"Program {prog} not found in path.")
+           path = os.path.normpath(os.path.abspath(os.path.join(os.path.dirname(deposit_gui.dgui.__file__), "graphviz", prog )))
         else:
             print("Running on other OS.")
         
@@ -1383,6 +1381,7 @@ class AGraph:
         """
         runprog = r'"%s"' % self._get_prog(prog)
         cmd = " ".join([runprog, args])
+        print("spustam program cmd: "+cmd)
         dotargs = shlex.split(cmd)
         p = subprocess.Popen(
             dotargs,
@@ -1819,6 +1818,7 @@ class AGraph:
         paths = os.environ["PATH"]
         for path in paths.split(os.pathsep):
             match = glob.glob(os.path.join(path, name))
+            print("** "+path)
             if match:
                 return match[0]
         raise ValueError(f"No prog {name} in path.")

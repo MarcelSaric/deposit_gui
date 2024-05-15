@@ -30,4 +30,4 @@ class AbstractSubview(QtCore.QObject):
 		path = os.path.join(os.path.dirname(deposit_gui.__file__), "res", name)
 		if os.path.isfile(path):
 			return QtGui.QIcon(path)
-		raise Exception("Could not load icon %s" % (name))
+		raise Exception("Could not load icon %s %s" % (name, self._res_folder))
