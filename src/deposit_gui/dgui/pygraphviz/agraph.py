@@ -1360,9 +1360,10 @@ class AGraph:
         if sys.platform == "win32":
             path = os.path.normpath(os.path.abspath(os.path.join(os.path.dirname(deposit_gui.dgui.__file__), "graphviz", prog + ".exe")))
         elif sys.platform == "linux":
-            print("Running on Linux.")
+            print("Running on Linux. Graphviz")
+            path = os.path.join("/usr/bin",  prog)
         elif sys.platform == "darwin":
-           path = os.path.normpath(os.path.abspath(os.path.join(os.path.dirname(deposit_gui.dgui.__file__), "graphviz", prog )))
+            path = os.path.normpath(os.path.abspath(os.path.join(os.path.dirname(deposit_gui.dgui.__file__), "graphviz", prog )))
         else:
             print("Running on other OS.")
         

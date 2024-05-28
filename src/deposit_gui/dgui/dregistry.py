@@ -32,6 +32,13 @@ class DRegistry(QtCore.QObject):
                 self._vars[key] = self.preferences.value(key)
             self.preferences.endGroup()
         elif sys.platform.startswith("linux"):
+             # Kód pre macOS
+            self.preferences = QtCore.QSettings("LAP 4")
+            self.preferences.beginGroup(self.app_name)
+            keys = self.preferences.allKeys()
+            for key in keys:
+                self._vars[key] = self.preferences.value(key)
+            self.preferences.endGroup()
             # Kód pre Linux
             print("Spustam kód pre Linux")
         else:
@@ -59,6 +66,11 @@ class DRegistry(QtCore.QObject):
             for var in self._set_data:
                 winreg.SetValueEx(self.key, var, 0, winreg.REG_SZ, self._set_data[var])
         elif sys.platform == "darwin":
+            self.preferences.beginGroup(self.app_name)
+            for var in self._set_data:
+                self.preferences.setValue(var, self._set_data[var])
+            self.preferences.endGroup()
+        elif sys.platform == "linux":
             self.preferences.beginGroup(self.app_name)
             for var in self._set_data:
                 self.preferences.setValue(var, self._set_data[var])

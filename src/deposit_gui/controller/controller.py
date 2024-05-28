@@ -153,6 +153,7 @@ class Controller(QtCore.QObject):
 	def open_in_external(self, path):
 		
 		if sys.platform in ["linux", "linux2", "darwin"]:
+			print('Nedorobeny kod na open in external !!!')
 			return # TODO		
 		if sys.platform.startswith("win"):
 			if os.path.isfile(path):

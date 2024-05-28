@@ -18,7 +18,8 @@ if sys.platform == "win32":
     path = os.path.normpath(os.path.abspath(os.path.join(os.path.dirname(deposit_gui.dgui.__file__), "graphviz")))
     os.add_dll_directory(path)
 elif sys.platform == "linux":
-    print("Running on Linux")
+    path = "/usr/bin"
+    print("Running on Linux pygraphviz")
 elif sys.platform == "darwin":
     path = os.path.normpath(os.path.abspath(os.path.join(os.path.dirname(deposit_gui.dgui.__file__), "graphviz")))
     print(path)
