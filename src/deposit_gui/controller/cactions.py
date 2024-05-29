@@ -10,6 +10,7 @@ from PySide2 import (QtWidgets, QtGui, QtCore)
 from collections import defaultdict
 from natsort import natsorted
 import os
+import sys
 
 class CActions(DCActions):
 	
@@ -151,6 +152,14 @@ class CActions(DCActions):
 		path, format = self.cmain.cview.get_save_path("Save Database As", "Pickle (*.pickle);;JSON (*.json)")
 		if not path:
 			return
+		
+
+		if sys.platform.startswith("linux"):
+			if not path.endswith('.pickle'):
+				path+='.pickle'
+				
+		print("on_saveas ",path,format)
+
 		self.cmain.cview.set_recent_dir(path)
 		self.cmain.cmodel.save(path = path)
 		url = as_url(path)
